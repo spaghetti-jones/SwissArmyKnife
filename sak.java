@@ -9,6 +9,7 @@
  */
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class sak {
     public static void main(String[] args) {
@@ -25,12 +26,39 @@ public class sak {
 			System.out.println("-Help is now being executed...");
 			HelpCommand.helpOutput();
 		}
-		
-		else if (args[0].equalsIgnoreCase("-HttpRequestIndex") || args[0].equalsIgnoreCase("-HttpRequest")) {
-			System.out.println("\nPlease execute the same command again");
+
+		else if (args[0].equalsIgnoreCase("-HttpRequest")) {
 			if (args.length == 1) {
 				System.out.println("Error... Please enter a valid URL");
 			}else{
+				System.out.println("\nPlease execute the same command again");
+				int i;
+				String link = args[1];
+				HttpRequest request = new HttpRequest();
+				for (i = 0; i < 1; i++) {
+					String userText = scan.nextLine();
+					System.out.println(userText);
+					if (userText.contains("-HttpRequest")) {
+						System.out.println("-HttpRequest is now being executed...");
+						long startExecuting = System.nanoTime();
+						request.readURL(link);
+						long finishExecuting = System.nanoTime();
+						System.out.println("\nYou entered: " + request);
+						System.out.println("\nFunction execution time: " + (finishExecuting - startExecuting)/1000000 + " milliseconds");
+						System.out.println("");
+					}
+					else {
+						System.out.println("Error... Please enter a valid URL");
+					}
+				}
+			}
+		}
+		
+		else if (args[0].equalsIgnoreCase("-HttpRequestIndex")) {
+			if (args.length == 1) {
+				System.out.println("Error... Please enter a valid URL");
+			}else{
+				System.out.println("\nPlease execute the same command again");
 				int i;
 				String link = args[1];
 				HttpRequest request = new HttpRequest();
@@ -39,13 +67,12 @@ public class sak {
 					System.out.println(userText);
 					if (userText.contains("-HttpRequestIndex")) {
 						System.out.println("-HttpRequestIndex is now being executed...");
+						long startExecuting = System.nanoTime();
 						request.readURL(link);
+						long finishExecuting = System.nanoTime();
 						System.out.println("\nYou entered: " + request);
-					}
-					else if (userText.contains("-HttpRequest")) {
-						System.out.println("-HttpRequest is now being executed...");
-						request.readURL(link);
-						System.out.println("\nYou entered: " + request);
+						System.out.println("\nFunction execution time: " + (finishExecuting - startExecuting)/1000000 + " milliseconds");
+						System.out.println("");
 					}
 					else {
 						System.out.println("Error... Please enter a valid URL");
